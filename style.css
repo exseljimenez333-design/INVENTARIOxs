@@ -214,7 +214,7 @@ tbody tr:hover{
 
 }
 .scanner-container{
-    
+
 .scanner-container{
     position:relative;
     z-index:1;
@@ -239,4 +239,24 @@ tbody tr:hover{
     border-radius:20px;
     overflow:hidden;
     margin-bottom:20px;
+}
+#reader video{
+    width:100% !important;
+    border-radius:20px;
+    pointer-events:none;
+}
+
+#reader{
+    position:relative;
+    z-index:1;
+}
+
+.panel{
+    position:relative;
+    z-index:2;
+}
+
+button{
+    position:relative;
+    z-index:9999;
 }

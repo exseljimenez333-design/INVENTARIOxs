@@ -667,7 +667,7 @@ function iniciarEscaner() {
         config,
 
         async(decodedText) => {
-             html5QrCode.stop();    
+             html5QrCode.stop(); // html5QrCode.stop();
             document.getElementById(
                 "producto"
             ).value = decodedText;
