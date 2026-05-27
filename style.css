@@ -87,7 +87,7 @@ body{
 /* SIDEBAR */
 
 .sidebar{
-    width:260px;
+    display:none;
     background:#111827;
     padding:25px;
     border-right:1px solid #1f2937;
@@ -128,9 +128,8 @@ body{
 /* CONTENIDO */
 
 .contenido{
-    flex:1;
-    padding:25px;
-    overflow:auto;
+   width:100%;
+    margin-left:0;
 }
 
 /* TOPBAR */
