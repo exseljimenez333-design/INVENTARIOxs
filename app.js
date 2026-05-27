@@ -681,35 +681,3 @@ function iniciarEscaner() {
 
     );
 }
-syncFirebase.onSnapshot(
-
-    syncFirebase.collection(
-        syncFirebase.db,
-        "scanner"
-    ),
-
-    (snapshot) => {
-
-        snapshot.docChanges().forEach(change => {
-
-            if(change.type === "added"){
-
-                const data =
-                change.doc.data();
-
-                document.getElementById(
-                "producto"
-                ).value =
-                data.producto;
-
-                mostrarToast(
-                "Producto escaneado: "
-                + data.producto,
-                "#22c55e"
-                );
-            }
-
-        });
-
-    }
-);
