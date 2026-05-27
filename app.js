@@ -648,10 +648,10 @@ function iniciarEscaner() {
         fps: 20,
 
 qrbox: {
-    width: 300,
-    height: 150
+    width: 320,
+    height: 320
 },
-
+  aspectRatio: 1.777,
         formatsToSupport: [
 
             Html5QrcodeSupportedFormats.CODE_128,
@@ -665,7 +665,7 @@ qrbox: {
     { facingMode: "environment" },
 
     config,
-
+    
     (decodedText, decodedResult) => {
 
         console.log("CODIGO LEIDO:", decodedText);
@@ -680,8 +680,7 @@ qrbox: {
         );
 
         html5QrCode.stop();
-
-    }
+ }
 
 );
 
