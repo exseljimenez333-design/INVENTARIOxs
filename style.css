@@ -211,27 +211,16 @@ tbody tr:hover{
 
     box-shadow:
     0 10px 40px rgba(0,0,0,0.4);
-
-}
-.scanner-container{
-
+    }
 .scanner-container{
     position:relative;
     z-index:1;
-}
     background:#111827;
-
     padding:20px;
-
     border-radius:20px;
-
     margin-bottom:30px;
-
-    box-shadow:
-    0 10px 40px rgba(0,0,0,0.4);
-
+    box-shadow:0 10px 40px rgba(0,0,0,0.4);
 }
-
 #reader{
     width:100%;
     position:relative;

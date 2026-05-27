@@ -676,24 +676,29 @@ async function iniciarEscaner() {
 
         config,
 
-        (decodedText) => {
+       async (decodedText) => {
 
-            await html5QrCode.stop();
+    await html5QrCode.stop();
 
-            document.getElementById("reader").innerHTML = "";
+    document.getElementById("reader").innerHTML = "";
 
-            document.getElementById(
-                "producto"
-            ).value = decodedText;
+    document.getElementById(
+        "producto"
+    ).value = decodedText;
 
-            
+    await syncFirebase.addDoc(scannerRef, {
 
-            mostrarToast(
-                "Escaneado: " + decodedText,
-                "#22c55e"
-            );
+        producto: decodedText,
+        fecha: new Date().toISOString()
 
-        }
+    });
+
+    mostrarToast(
+        "Escaneado: " + decodedText,
+        "#22c55e"
+    );
+
+}
 
     );
 
