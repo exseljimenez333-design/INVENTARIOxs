@@ -214,7 +214,11 @@ tbody tr:hover{
 
 }
 .scanner-container{
-
+    
+.scanner-container{
+    position:relative;
+    z-index:1;
+}
     background:#111827;
 
     padding:20px;
@@ -229,9 +233,10 @@ tbody tr:hover{
 }
 
 #reader{
-
+    width:100%;
+    position:relative;
+    z-index:1;
     border-radius:20px;
-
     overflow:hidden;
-
+    margin-bottom:20px;
 }
