@@ -1,3 +1,4 @@
+let html5QrCode;
 let editandoIndex = null;
 let chart;
 const scannerRef =
@@ -644,9 +645,18 @@ function editarMovimiento(index){
     "#f59e0b"
     );
 }
-function iniciarEscaner() {
+async function iniciarEscaner() {
 
-    const html5QrCode =
+    if(html5QrCode){
+
+        try{
+            await html5QrCode.stop();
+        }catch(e){}
+    }
+
+    document.getElementById("reader").innerHTML = "";
+
+    html5QrCode =
     new Html5Qrcode("reader");
 
     const config = {
@@ -666,22 +676,17 @@ function iniciarEscaner() {
 
         config,
 
-        async(decodedText) => {
-             html5QrCode.stop(); // html5QrCode.stop();
+        (decodedText) => {
+
+            await html5QrCode.stop();
+
+            document.getElementById("reader").innerHTML = "";
+
             document.getElementById(
                 "producto"
             ).value = decodedText;
 
-            await syncFirebase.addDoc(
-
-                scannerRef,
-
-                {
-                    producto: decodedText,
-                    fecha: new Date().toISOString()
-                }
-
-            );
+            
 
             mostrarToast(
                 "Escaneado: " + decodedText,
