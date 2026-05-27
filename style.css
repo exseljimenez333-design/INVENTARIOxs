@@ -84,52 +84,12 @@ body{
     height:100vh;
 }
 
-/* SIDEBAR */
-
-.sidebar{
-    display:none;
-    background:#111827;
-    padding:25px;
-    border-right:1px solid #1f2937;
-}
-
-.logo{
-    font-size:22px;
-    font-weight:bold;
-    margin-bottom:40px;
-    color:#3b82f6;
-}
-
-.logo i{
-    margin-right:10px;
-}
-
-.sidebar ul{
-    list-style:none;
-}
-
-.sidebar li{
-    padding:15px;
-    border-radius:12px;
-    margin-bottom:10px;
-    cursor:pointer;
-    transition:0.3s;
-}
-
-.sidebar li:hover{
-    background:#1e293b;
-    transform:translateX(5px);
-}
-
-.active{
-    background:#2563eb;
-}
-
 /* CONTENIDO */
 
 .contenido{
    width:100%;
     margin-left:0;
+    padding:20px;
 }
 
 /* TOPBAR */
