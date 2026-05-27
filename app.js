@@ -639,39 +639,28 @@ function editarMovimiento(index){
     "#f59e0b"
     );
 }
-function iniciarEscaner(){
+function iniciarEscaner() {
 
-    const scanner = new Html5QrcodeScanner(
+    const html5QrCode = new Html5Qrcode("reader");
 
-        "reader",
-
+    html5QrCode.start(
+        { facingMode: "environment" }, // cámara trasera
         {
-            fps:10,
-            qrbox:250
+            fps: 10,
+            qrbox: 250
+        },
+        (codigo) => {
+
+            document.getElementById("producto").value = codigo;
+
+            mostrarToast(
+                "Escaneado: " + codigo,
+                "#22c55e"
+            );
+
+            html5QrCode.stop();
         }
-
     );
-
-    scanner.render(success,error);
-
-    function success(resultado){
-
-        document.getElementById(
-            "producto"
-        ).value = resultado;
-
-        mostrarToast(
-
-            "Código escaneado: " + resultado,
-            "#22c55e"
-
-        );
-
-        scanner.clear();
-    }
-
-    function error(err){}
-
 }
 syncFirebase.onSnapshot(
 
