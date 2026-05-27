@@ -668,20 +668,39 @@ qrbox: {
     
     (decodedText, decodedResult) => {
 
-        console.log("CODIGO LEIDO:", decodedText);
+        document.getElementById("producto").value =
+decodedText;
 
-        alert("Código leído: " + decodedText);
+db.collection("scanner")
+.doc("codigo")
+.set({
 
-        document.getElementById("producto").value = decodedText;
+producto: decodedText
 
-        mostrarToast(
-            "Escaneado: " + decodedText,
-            "#22c55e"
-        );
+});
 
-        html5QrCode.stop();
+mostrarToast(
+"Escaneado: " + decodedText,
+"#22c55e"
+);
+
+html5QrCode.stop();
  }
 
 );
 
 }
+db.collection("scanner")
+.doc("codigo")
+.onSnapshot((doc) => {
+
+const data = doc.data();
+
+if(data){
+
+document.getElementById("producto").value =
+data.producto;
+
+}
+
+});
