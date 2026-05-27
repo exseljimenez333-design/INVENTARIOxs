@@ -660,26 +660,29 @@ qrbox: {
 
         ]
     };
-
     html5QrCode.start(
 
-        { facingMode: "environment" },
+    { facingMode: "environment" },
 
-        config,
+    config,
 
-        (codigo) => {
+    (decodedText, decodedResult) => {
 
-            document.getElementById(
-                "producto"
-            ).value = codigo;
+        console.log("CODIGO LEIDO:", decodedText);
 
-            mostrarToast(
-                "Escaneado: " + codigo,
-                "#22c55e"
-            );
+        alert("Código leído: " + decodedText);
 
-            html5QrCode.stop();
-        }
+        document.getElementById("producto").value = decodedText;
 
-    );
+        mostrarToast(
+            "Escaneado: " + decodedText,
+            "#22c55e"
+        );
+
+        html5QrCode.stop();
+
+    }
+
+);
+
 }
