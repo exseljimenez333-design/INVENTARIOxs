@@ -1,5 +1,10 @@
 let editandoIndex = null;
 let chart;
+const scannerRef =
+syncFirebase.collection(
+    syncFirebase.db,
+    "scanner"
+);
 function filtrarTabla(){
 
     const texto =
@@ -30,7 +35,7 @@ function filtrarTabla(){
     });
 }
 
-let movimientos =
+let movimientos = 
 JSON.parse(localStorage.getItem("movimientos")) || [];
 
 let inventario =
@@ -641,66 +646,80 @@ function editarMovimiento(index){
 }
 function iniciarEscaner() {
 
-    const html5QrCode = new Html5Qrcode("reader");
+    const html5QrCode =
+    new Html5Qrcode("reader");
 
     const config = {
 
-        fps: 20,
+        fps: 30,
 
-qrbox: {
-    width: 320,
-    height: 320
-},
-  aspectRatio: 1.777,
-        formatsToSupport: [
+        qrbox: {
+            width: 300,
+            height: 300
+        }
 
-            Html5QrcodeSupportedFormats.CODE_128,
-            Html5QrcodeSupportedFormats.EAN_13,
-            Html5QrcodeSupportedFormats.UPC_A,
-
-        ]
     };
+
     html5QrCode.start(
 
-    { facingMode: "environment" },
+        { facingMode: "environment" },
 
-    config,
-    
-    (decodedText, decodedResult) => {
+        config,
 
-        document.getElementById("producto").value =
-decodedText;
+        async(decodedText) => {
+             html5QrCode.stop();    
+            document.getElementById(
+                "producto"
+            ).value = decodedText;
 
-db.collection("scanner")
-.doc("codigo")
-.set({
+            await syncFirebase.addDoc(
 
-producto: decodedText
+                scannerRef,
 
-});
+                {
+                    producto: decodedText,
+                    fecha: new Date().toISOString()
+                }
 
-mostrarToast(
-"Escaneado: " + decodedText,
-"#22c55e"
-);
+            );
 
-html5QrCode.stop();
- }
+            mostrarToast(
+                "Escaneado: " + decodedText,
+                "#22c55e"
+            );
 
-);
+        }
 
-}
-db.collection("scanner")
-.doc("codigo")
-.onSnapshot((doc) => {
-
-const data = doc.data();
-
-if(data){
-
-document.getElementById("producto").value =
-data.producto;
+    );
 
 }
+syncFirebase.onSnapshot(
 
-});
+    scannerRef,
+
+    (snapshot) => {
+
+        snapshot.docChanges().forEach((change) => {
+
+            if(change.type === "added"){
+
+                const data =
+                change.doc.data();
+
+                document.getElementById(
+                    "producto"
+                ).value =
+                data.producto;
+
+                mostrarToast(
+                    "SYNC: " + data.producto,
+                    "#3b82f6"
+                );
+
+            }
+
+        });
+
+    }
+
+);

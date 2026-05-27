@@ -40,3 +40,4 @@ window.syncFirebase = {
     addDoc,
     onSnapshot
 };
+window.db = db;
