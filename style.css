@@ -76,12 +76,11 @@ body{
     background:#0f172a;
     color:white;
     font-family:Arial;
-    overflow:hidden;
 }
 
 .layout{
-    display:flex;
-    height:100vh;
+    width:100%;
+    min-height:100vh;
 }
 
 /* CONTENIDO */
