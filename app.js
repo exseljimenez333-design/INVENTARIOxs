@@ -733,3 +733,10 @@ syncFirebase.onSnapshot(
     }
 
 );
+window.registrarEntrada = registrarEntrada;
+window.registrarSalida = registrarSalida;
+window.iniciarEscaner = iniciarEscaner;
+window.exportarExcel = exportarExcel;
+window.editarMovimiento = editarMovimiento;
+window.eliminarMovimiento = eliminarMovimiento;
+window.filtrarTabla = filtrarTabla;
