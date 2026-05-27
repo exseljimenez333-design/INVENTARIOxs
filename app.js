@@ -643,15 +643,33 @@ function iniciarEscaner() {
 
     const html5QrCode = new Html5Qrcode("reader");
 
+    const config = {
+
+        fps: 10,
+
+        qrbox: 250,
+
+        formatsToSupport: [
+
+            Html5QrcodeSupportedFormats.QR_CODE,
+            Html5QrcodeSupportedFormats.CODE_128,
+            Html5QrcodeSupportedFormats.EAN_13,
+            Html5QrcodeSupportedFormats.EAN_8
+
+        ]
+    };
+
     html5QrCode.start(
-        { facingMode: "environment" }, // cámara trasera
-        {
-            fps: 10,
-            qrbox: 250
-        },
+
+        { facingMode: "environment" },
+
+        config,
+
         (codigo) => {
 
-            document.getElementById("producto").value = codigo;
+            document.getElementById(
+                "producto"
+            ).value = codigo;
 
             mostrarToast(
                 "Escaneado: " + codigo,
@@ -660,6 +678,7 @@ function iniciarEscaner() {
 
             html5QrCode.stop();
         }
+
     );
 }
 syncFirebase.onSnapshot(
