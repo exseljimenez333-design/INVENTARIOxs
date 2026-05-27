@@ -639,76 +639,39 @@ function editarMovimiento(index){
     "#f59e0b"
     );
 }
-function iniciarScanner(){
+function iniciarEscaner(){
 
-    const scanner = new Html5Qrcode("reader");
+    const scanner = new Html5QrcodeScanner(
 
-    scanner.start(
-
-        { facingMode: "environment" },
+        "reader",
 
         {
             fps:10,
             qrbox:250
-        },
-
-        (codigo) => {
-
-            document.getElementById(
-            "producto"
-            ).value = codigo;
-
-            mostrarToast(
-            "Código detectado: " + codigo,
-            "#22c55e"
-            );
-syncFirebase.addDoc(
-
-    syncFirebase.collection(
-        syncFirebase.db,
-        "scanner"
-    ),
-
-    {
-
-        producto: productoDetectado
-        || codigo,
-
-        fecha: new Date()
-
-    }
-);
-syncFirebase.addDoc(
-
-    syncFirebase.collection(
-        syncFirebase.db,
-        "scanner"
-    ),
-
-    {
-
-        producto:
-        productoDetectado || codigo,
-
-        fecha: new Date()
-
-    }
-);
-           scanner.stop();
-        },
-
-        (error) => {
-
         }
 
-    ).catch(err => {
+    );
+
+    scanner.render(success,error);
+
+    function success(resultado){
+
+        document.getElementById(
+            "producto"
+        ).value = resultado;
 
         mostrarToast(
-        "Error al iniciar cámara",
-        "#ef4444"
+
+            "Código escaneado: " + resultado,
+            "#22c55e"
+
         );
 
-    });
+        scanner.clear();
+    }
+
+    function error(err){}
+
 }
 syncFirebase.onSnapshot(
 
@@ -774,4 +737,4 @@ syncFirebase.onSnapshot(
         });
 
     }
-);
+)
