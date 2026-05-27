@@ -645,16 +645,18 @@ function iniciarEscaner() {
 
     const config = {
 
-        fps: 10,
+        fps: 20,
 
-        qrbox: 250,
+qrbox: {
+    width: 300,
+    height: 150
+},
 
         formatsToSupport: [
 
-            Html5QrcodeSupportedFormats.QR_CODE,
             Html5QrcodeSupportedFormats.CODE_128,
             Html5QrcodeSupportedFormats.EAN_13,
-            Html5QrcodeSupportedFormats.EAN_8
+            Html5QrcodeSupportedFormats.UPC_A,
 
         ]
     };
